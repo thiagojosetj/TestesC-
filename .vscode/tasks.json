@@ -1,0 +1,53 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "C++: Build (MSYS2 ucrt64) - active file",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "mkdir build 2>nul & C:\\msys64\\ucrt64\\bin\\g++.exe -Wall -Wextra -g3 \"${file}\" -o \"build\\${fileBasenameNoExtension}.exe\""
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "C++: Run (active file)",
+      "type": "shell",
+      "command": "\"${fileDirname}\\build\\${fileBasenameNoExtension}.exe\"",
+      "dependsOn": "C++: Build (MSYS2 ucrt64) - active file",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false,
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "C++: Clean build folder",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "if exist build rmdir /s /q build"
+      ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}
